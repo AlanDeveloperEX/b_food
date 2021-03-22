@@ -1,3 +1,6 @@
+## Biblioteca React para construção dos componentes de UI
+## Styled Components para a estilização dos componentes criados
+
 # Axios Dependence
 
 ### `yarn add axios`
