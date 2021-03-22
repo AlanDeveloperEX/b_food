@@ -9,18 +9,18 @@ function SearchInput({Name, Placeholder, ...props}) {
   const [showDrop, setShowDrop] = useState(false)
   const [dropValue] = useState('')
   const [items] = useState([
-    {city : 'Brasilia', value : '66', state: 'SP'},
-    {city : 'São Paulo', value : '67', state: 'SP'},
-    {city : 'Rio de Janeiro', value : '73', state: 'RJ'}
+    {city : 'Brasilia', value : '66', state: 'SP', short: 'brasilia'},
+    {city : 'São Paulo', value : '67', state: 'SP', short: 'saopaulo'},
+    {city : 'Rio de Janeiro', value : '73', state: 'RJ', short: 'riodejaneiro'}
   ])
 
   const handleDropDown = () => {
     setShowDrop(!showDrop)
   }
 
-  const setCurrentyValue = (currentyCity, currentyIdCity) => {
-    console.log(currentyCity, currentyIdCity)
-    history.push(`/search/saopaulo/67`);
+  const setCurrentyValue = (currentyIdCity, currentyCity ) => {
+
+    history.push(`/search/${currentyCity}/${currentyIdCity}`);
 
     setShowDrop(!showDrop)
   }
@@ -39,7 +39,7 @@ function SearchInput({Name, Placeholder, ...props}) {
         <DropDown value={dropValue} >
           {
             items.map((item, key) => 
-              <p id={key} onClick={(id) => setCurrentyValue(id.value, id.city_search)} key={key} value={item.value} city_search={item.city}>
+              <p id={key} onClick={() => setCurrentyValue(item.value, item.short)} key={key} value={item.value} city_search={item.short}>
                 {item.city} - {item.state}
               </p>
             )

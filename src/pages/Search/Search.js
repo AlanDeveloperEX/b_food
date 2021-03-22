@@ -10,7 +10,7 @@ const Search = () => {
 
   const { checkedStars, isCheck } = useFilter();
 
-  let {id, city} = useParams();
+  let {city, id} = useParams();
 
   const [allData, setAllData] = useState([]);
 
