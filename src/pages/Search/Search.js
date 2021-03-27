@@ -13,24 +13,25 @@ const Search = () => {
   let {city, id} = useParams();
 
   const [allData, setAllData] = useState([]);
+  const [fiteredData, setFiteredDataData] = useState([]);
 
   const fiters = (perStars = 0, perPrice = 0) => {
     
-    if ( perPrice !== 0 ) {
-      let filteredPrice = allData.filter( restaurants => perPrice === parseInt(restaurants.restaurant.price_range) )
+    if ( perStars !== 0 && perPrice !== 0) {
+      let filteredPrice = allData.filter( restaurants => perPrice === parseInt(restaurants.restaurant.price_range) && perStars === parseInt(restaurants.restaurant.user_rating.aggregate_rating))
 
-      setAllData(filteredPrice)
+      return setFiteredDataData(filteredPrice)
 
     } else if (perStars !== 0 ) {
       let filteredStars = allData.filter( restaurants => perStars === parseInt(restaurants.restaurant.user_rating.aggregate_rating) )
 
-      setAllData(filteredStars)
+      return setFiteredDataData(filteredStars)
 
-    } else if ( perStars !== 0 && perPrice !== 0) {
+    } else if ( perPrice !== 0 ) {
 
-      let filterBoth = allData.filter( restaurants => perStars === parseInt(restaurants.restaurant.user_rating.aggregate_rating) && perPrice === parseInt(restaurants.restaurant.price_range) )
+      let filterBoth = allData.filter( restaurants => perPrice === parseInt(restaurants.restaurant.price_range) )
 
-      setAllData(filterBoth)
+      return setFiteredDataData(filterBoth)
 
     }
   }
@@ -46,6 +47,7 @@ const Search = () => {
 
     }).then(response => {
       setAllData(response.data.restaurants);
+      setFiteredDataData(response.data.restaurants);
       fiters(checkedStars, isCheck);
     })
   }, [checkedStars, isCheck])
@@ -61,7 +63,7 @@ const Search = () => {
             <div>
               <CardContainerGrid2>
 
-                {allData.length > 0 ?  allData.map((restaurants, i) =>
+                {fiteredData.length > 0 ?  fiteredData.map((restaurants, i) =>
                   <Card
                     key={i}
                     title={restaurants.restaurant.name }
