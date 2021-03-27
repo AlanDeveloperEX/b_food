@@ -17,9 +17,9 @@ export const CheckContainer = styled.div`
   -ms-user-select: none;
   user-select: none;
 
-  &:hover input ~ span {
+  /* &:hover input ~ span {
     background-color: var(--gray);
-  }
+  } */
 
   svg {
     font-size: 1.5rem;
@@ -56,26 +56,5 @@ export const CheckMark = styled.span`
   border-radius: 4px;
   
   background-color: ${({active}) => (active ? 'var(--gray)' : 'var(--white)')};
-
-/* 
-  &:after {
-    content: "";
-    position: absolute;
-    display: none;
-    display: block;
-
-    left: 4px;
-    top: 0;
-
-    width: 4px;
-    height: 10px;
-    
-    border: solid transparent;
-    border-width: 0 2px 2px 0;
-
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  } */
 
 `;
